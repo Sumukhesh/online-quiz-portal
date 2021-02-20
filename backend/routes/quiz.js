@@ -7,22 +7,22 @@ const {
     getQuizById,
     getQuizByDifficultyLevel, 
     getResultByQuizId, 
-    getPrevResultsByUserId
-} = require("../controllers/user");
+    getAllQuizes
+} = require("../controllers/quiz");
 
 router.param("userId", getUserById);
 router.param("quizId", getQuizById);
+router.param("difficultyLevel",getQuizByDifficultyLevel)
 
 //create quiz route
 router.post("/quiz/create/:userId", isSignedIn, isAuthenticated, isAdmin, createQuiz);
 
 //getting quiz by userId and DifficultyLevel
-router.get("/quiz/:userId", isSignedIn, isAuthenticated, getQuizByDifficultyLevel);
+router.get("/quiz/:userId/:difficultyLevel", isSignedIn, isAuthenticated);
 
 //getting the results of the quiz
 router.post("/quiz/:userId/:quizId", isSignedIn, isAuthenticated, getResultByQuizId );
 
-//getting previous results of the user by userId
-router.get("/quiz/:userId", isSignedIn, isAuthenticated, getPrevResultsByUserId)
 
-
+//getting all the quizes available in db
+router.get("/quizes/:userId", isSignedIn, isAuthenticated, isAdmin, getAllQuizes)
