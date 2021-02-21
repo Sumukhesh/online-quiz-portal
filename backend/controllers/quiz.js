@@ -2,6 +2,9 @@ const User = require("../models/user");
 const Quiz = require("../models/quiz");
 const formidable = require("formidable");
 const fs = require('fs');
+const user = require("../models/user");
+const quiz = require("../models/quiz");
+const { profile } = require("console");
 
 
 
@@ -20,75 +23,68 @@ exports.getQuizById = (req, res, next, id) => {
 };
 
 //Param to get quiz by difficulty level given from req obj
-exports.getQuizByDifficultyLevel = (req, res, difficultyLevel, next) => {
-    Quiz.findOne({difficulty_level: `${difficultyLevel}`})
+exports.getQuizByDifficultyLevel = (req, res, next, difficultyLevel) => {
+    Quiz.findOne({difficulty_level: difficultyLevel})
     .exec((err,quiz) => {
         if(err || !quiz){
             return res.status(400).json({
                 error: "Cant find the quiz with the given difficulty level"
             })
         }
-        var quizObj;
-        quizObj.quizId = quiz._id;
-        quizObj.name = quiz.name;
-        quizObj.questions = quiz.quiz_questions;
-        quizObj.difficultyLevel = quiz.difficulty_level;
-
-        res.json(quizObj);
+        req.quiz = quiz;
+        console.log(req.quiz);
+        res.json({
+            quiz_id: quiz._id,
+            difficulty_level: quiz.difficulty_level,
+            quiz_questions: quiz.quiz_questions,
+        });
         next();
     })
 };
 
 //Controller to calculate the result of the quiz
 exports.getResultByQuizId = (req,res) => {
-    var key = quiz.quiz_key;
-    var userResponses = req.user_responses
-    if(!userResponses || !req){
-        return res.status(400).json({
-            error: "User responses not found"
-        });
-    };
+    var key = req.quiz.quiz_key;
+var userResponses = req.body.user_responses
+if(!userResponses || !req){
+    return res.status(400).json({
+        error: "User responses not found"
+    });
+};
 
-    var result = (arr1, arr2) => {
-        const result = [];
-        for(let i = 0; i<arr1.length; i++){
-          if(arr1[i] === arr2[i]){
-            result.push(arr1[i]);
-          }
-        }
-        //console.log(result.length);
-        return result.length; 
+var result = (arr1, arr2) => {
+    const result = [];
+    for(let i = 0; i<arr1.length; i++){
+      if(arr1[i] === arr2[i]){
+        result.push(arr1[i]);
       }
-
+    }
+    return result.length; 
+  }
     var finalResult = result(userResponses, key); 
-    res.json(finalResult);  
+    req.profile.prev_quiz_results.push(finalResult);
+    User.findById(req.profile._id)
+    .exec((err, user) => {
+        user.prev_quiz_results.push(finalResult);
+        user.save();
+    })
+    console.log(req.profile.prev_quiz_results);
+
+    res.json(finalResult);
 };
 
 //controller to create quiz
 exports.createQuiz = (req, res) => {
-    let form = new formidable.IncomingForm()
-    form.parse(req, (err,file) => {
-        if(err || !file){
-            return res.status(400).json({
-                error: "Problem with uploading JSON file"
-            });
-        };
-
-        //Initalizing quiz model 
-        let quiz = new Quiz();
-        let rawQuiz = fs.readFileSync(file);
-        quiz = JSON.parse(rawQuiz);
-
-        //saving quiz to db
-        quiz.save((err, quiz) => {
-            if(err){
-                res.status(400).json({
-                    error: "Saving quiz to DB failed"
-                });
-            };
-            res.json(quiz);
+    if(!req.body){
+        return res.status(400).json({
+            error: "Request body object not readable"
         });
-    });
+    }
+    
+    let quiz = new Quiz(req.body);
+    quiz.save();
+    console.log("Saved to db");
+    res.json(req.body)
 };
 
 //controller to get all the available quizes in DB

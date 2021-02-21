@@ -9,15 +9,12 @@ exports.signup = (req, res) => {
 
     if(!errors.isEmpty()){
         return res.status(422).json({
-            errors: [errors.array()[0].msg],
+            errors: [errors.array()[0].msg],          
         })
     }
 
-    const user =new User(req.body);
+    const user = new User(req.body);
     user.save((err,user) => {
-        //TO check if user is saved, 
-        //Must be removed later
-        console.log(user);
         if(err || !user){
             return res.status(400).json({
                 error: "Unable to Save user into Database"
@@ -32,7 +29,7 @@ exports.signup = (req, res) => {
 };
 
 //Signin Controller
-exports.sigin = (req, res) => {
+exports.signin = (req, res) => {
     const errors = validationResult(req);
     const {email, password} = req.body;
 
@@ -79,6 +76,7 @@ exports.signout = (req, res) => {
 exports.isSignedIn = expressJwt({
     secret: process.env.SECRET,
     userProperty: "auth",
+    algorithms: ['sha1', 'RS256', 'HS256']
 })
 
 //custom middlewares
@@ -102,12 +100,10 @@ exports.isAdmin = (req, res, next) => {
 };
 
 //Controller for getting a user details by id
-exports.getUserById = (req, res, id, next) => {
+exports.getUserById = (req, res, next, id) => {
     User.findById(id).exec((err, user) => {
         if(err || !user){
-            return res.status(401).json({
-                error: "No user found in db, by given id"
-            })
+            return res.status(401).json(id)
         }
         req.profile = user
         next();
@@ -118,7 +114,7 @@ exports.getUserById = (req, res, id, next) => {
 exports.getPrevResultsById = (req, res) => {
     User.findById(req.profile._id)
     .exec((err, user) => {
-        if(err || !user){
+        if(!user){
             return res.status(401).json({
                 error: "No user found in db, by given id"
             });

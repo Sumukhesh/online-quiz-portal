@@ -26,3 +26,5 @@ router.post("/quiz/:userId/:quizId", isSignedIn, isAuthenticated, getResultByQui
 
 //getting all the quizes available in db
 router.get("/quizes/:userId", isSignedIn, isAuthenticated, isAdmin, getAllQuizes)
+
+module.exports = router;
