@@ -45,8 +45,10 @@ exports.getQuizByDifficultyLevel = (req, res, next, difficultyLevel) => {
 //Controller to calculate the result of the quiz
 exports.getResultByQuizId = (req,res) => {
     var key = req.quiz.quiz_key;
-var userResponses = req.body.user_responses
-if(!userResponses || !req){
+    console.log(req.body);
+var userResponses = req.body
+console.log(userResponses);
+if(!userResponses || !req.body){
     return res.status(400).json({
         error: "User responses not found"
     });

@@ -17,22 +17,22 @@ const Menu = ({ history }) => (
       {isAuthenticated() && isAuthenticated().user.role === 0 && (
         <li className="nav-item ">
           <Link
-            style={currentTab(history, "/user/dashboard")}
+            style={currentTab(history, "/user/home")}
             className="nav-link "
-            to="/user/dashboard"
+            to="/user/home"
           >
-            U. Dashboard
+            {isAuthenticated().user.name}'s Dashboard
           </Link>
         </li>
       )}
       {isAuthenticated() && isAuthenticated().user.role === 1 && (
         <li className="nav-item ">
           <Link
-            style={currentTab(history, "/admin/dashboard")}
+            style={currentTab(history, "/admin/home")}
             className="nav-link "
             to="/admin/home"
           >
-            A. Dashboard
+           {isAuthenticated().user.name}'s  Dashboard
           </Link>
         </li>
       )}
