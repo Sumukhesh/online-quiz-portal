@@ -1,0 +1,114 @@
+[{
+  "_id": {
+    "$oid": "6031ead281dd54299982c2f7"
+  },
+  "role": 0,
+  "prev_quiz_results": [
+    "15",
+    "19",
+    "13",
+    "20",
+    "15",
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    5,
+    6,
+    0
+  ],
+  "name": "James Buckey",
+  "email": "buckyj@gmail.com",
+  "salt": "3c159252-02b8-4f02-9fac-8eb326007938",
+  "encry_password": "e546271511ae62ea3485e3a5f5a81cdc5605da6acbe9b74a24d0b8baf82fa410",
+  "createdAt": {
+    "$date": "2021-02-21T05:08:34.130Z"
+  },
+  "updatedAt": {
+    "$date": "2021-03-01T08:09:37.516Z"
+  },
+  "__v": 25
+},{
+  "_id": {
+    "$oid": "6031f36e81dd54299982c2f8"
+  },
+  "role": 1,
+  "prev_quiz_results": [],
+  "name": "Steve Rogers",
+  "email": "rogers@gmail.com",
+  "salt": "aa7a0615-e14b-4a3b-8b8d-137ac59a132d",
+  "encry_password": "5778eeacc76064354f53bb0e2f5365721b20a8d8b24846a2fabe27eb8bc3b3b3",
+  "createdAt": {
+    "$date": "2021-02-21T05:45:18.546Z"
+  },
+  "updatedAt": {
+    "$date": "2021-02-21T05:45:18.546Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6032700da36b4819d01ea1c2"
+  },
+  "role": 0,
+  "prev_quiz_results": [],
+  "name": "Tony Stark",
+  "email": "stark@gmail.com",
+  "salt": "3db09f53-567c-4cbe-b835-2af1eedeafce",
+  "encry_password": "e626197d3dc196ad3683bceaddab1160b637ebd175d29e2375275368f2e714b9",
+  "createdAt": {
+    "$date": "2021-02-21T14:37:01.624Z"
+  },
+  "updatedAt": {
+    "$date": "2021-02-21T14:37:01.624Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60327185a55edb1b6256a62e"
+  },
+  "role": 0,
+  "prev_quiz_results": [
+    0,
+    1,
+    7,
+    6,
+    6,
+    5,
+    5,
+    5,
+    5,
+    5,
+    0,
+    1
+  ],
+  "name": "Bruce Banner",
+  "email": "banner@gmail.com",
+  "salt": "a47f9e8d-1fdf-476a-b452-c143dc351854",
+  "encry_password": "0804aa3e63b69605c4daeff4b5843b892d9aaea9894de7111af14b2271b6aff3",
+  "createdAt": {
+    "$date": "2021-02-21T14:43:17.707Z"
+  },
+  "updatedAt": {
+    "$date": "2021-03-01T06:27:03.687Z"
+  },
+  "__v": 12
+},{
+  "_id": {
+    "$oid": "6033df204ef62f9f24edd302"
+  },
+  "role": 1,
+  "prev_quiz_results": [],
+  "name": "Steve jobs",
+  "email": "jobs@apple.com",
+  "salt": "c5e8a32e-ffee-45d8-9309-3e6fc50dd1e3",
+  "encry_password": "2888d08242230687e11815f48ed1bad5fcd12654f41efab1c0f1614f572ed65a",
+  "createdAt": {
+    "$date": "2021-02-22T16:43:12.832Z"
+  },
+  "updatedAt": {
+    "$date": "2021-02-22T16:43:12.832Z"
+  },
+  "__v": 0
+}]

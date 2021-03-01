@@ -4,7 +4,7 @@ const formidable = require("formidable");
 const fs = require('fs');
 const user = require("../models/user");
 const quiz = require("../models/quiz");
-const { profile } = require("console");
+
 
 
 
@@ -46,7 +46,7 @@ exports.getQuizByDifficultyLevel = (req, res, next, difficultyLevel) => {
 exports.getResultByQuizId = (req,res) => {
     var key = req.quiz.quiz_key;
     console.log(req.body);
-var userResponses = req.body
+var userResponses = req.body.user_responses
 console.log(userResponses);
 if(!userResponses || !req.body){
     return res.status(400).json({

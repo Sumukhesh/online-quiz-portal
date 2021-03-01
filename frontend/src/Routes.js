@@ -1,12 +1,16 @@
 import React from 'react';
 import { BrowserRouter,Switch, Route } from 'react-router-dom';
 import AdminHome from './admin/AdminHome';
+import GetAllQuizzes from './admin/GetAllQuizzes';
 import PrivateRoute from './auth/PrivateRoute';
 import SignIn from './auth/SignIn';
 import SignUp from './auth/SignUp';
 import Quiz from './quiz/Quiz';
-import Test from './quiz/Test'
+import Test from './quiz/Test';
+import PrevResults from './user/PrevResults';
 import UserHome from './user/UserHome';
+
+
 
 
 const Routes = () => {
@@ -19,6 +23,8 @@ const Routes = () => {
             <PrivateRoute path="/user/home" exact component={UserHome} />
             <PrivateRoute path="/quiz" exact component={Quiz} />
             <PrivateRoute path="/admin/home" exact component={AdminHome} />
+            <PrivateRoute path="/user/previous-results" exact component={PrevResults} />
+            <PrivateRoute path="/admin/all-quizzes" exact component={GetAllQuizzes} />
 
 
         </Switch>

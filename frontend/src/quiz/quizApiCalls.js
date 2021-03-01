@@ -18,10 +18,11 @@ export const getResultByQuizId = (userId, quizId, token, userResponses) => {
     return fetch(`${API}/quiz/${userId}/${quizId}`,{
         method: "POST",
         headers: {
-            //Accept: "application/json",
+            Accept: "application/json",
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
         },
-        body: [userResponses]
+        body: JSON.stringify(userResponses)
             })
     .then((res) => {
         return res.json()

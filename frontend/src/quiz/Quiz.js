@@ -39,8 +39,8 @@ const Quiz = () => {
     const calculateResult = (e) => {
         e.preventDefault();
         setUserResponses({userResponses : user_responses})
-        console.log(user_responses);
-        getResultByQuizId(user._id, quizId, token, user_responses)
+        console.log(userResponses);
+        getResultByQuizId(user._id, quizId, token, userResponses)
         .then((data) => {
             if(data.error){
                 console.log(data.error);
